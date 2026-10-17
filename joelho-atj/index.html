@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Artroplastia total do joelho: guia interativo para o R1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F3F6F5;--surface:#FFFFFF;--ink:#14201E;--ink2:#4B5B58;--line:#D3DCD9;--drape:#2C6B67;--drape-ink:#FFFFFF;--drape-soft:#E1EEEC;--violet:#5A3CA0;--cut:#B42318;--cut-soft:#F7DFDB;--lig:#A86F12;--lig-soft:#F5E9D2;--bone:#E9E2D0;--bone-line:#8A8170;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#101715;--surface:#18211F;--ink:#E5ECEA;--ink2:#9EB1AD;--line:#2A3633;--drape:#6CC0B7;--drape-ink:#0E1A18;--drape-soft:#1C3532;--violet:#B19DEB;--cut:#F2796B;--cut-soft:#3A1F1C;--lig:#E3B356;--lig-soft:#3A2F1A;--bone:#38362E;--bone-line:#A69D88;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#101715;--surface:#18211F;--ink:#E5ECEA;--ink2:#9EB1AD;--line:#2A3633;--drape:#6CC0B7;--drape-ink:#0E1A18;--drape-soft:#1C3532;--violet:#B19DEB;--cut:#F2796B;--cut-soft:#3A1F1C;--lig:#E3B356;--lig-soft:#3A2F1A;--bone:#38362E;--bone-line:#A69D88;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);-webkit-text-size-adjust:100%}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;font-size:17px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+h1,h2,h3{font-family:"Archivo","Arial Narrow","Helvetica Neue",system-ui,sans-serif;line-height:1.08;margin:0}
+h1{font-size:clamp(2.5rem,7.5vw,4.6rem);font-weight:800;font-stretch:72%;letter-spacing:-0.005em;max-width:13ch}
+h2{font-size:clamp(1.8rem,4.2vw,2.6rem);font-weight:800;font-stretch:74%}
+h3{font-size:1.15rem;font-weight:700;font-stretch:88%}
+p{margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;gap:18px;align-items:center;overflow-x:auto;white-space:nowrap;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
+header.top .wrap::-webkit-scrollbar{display:none}
+header.top a{color:var(--ink2);text-decoration:none;font-size:15px;padding:4px 0}
+header.top a:hover{color:var(--ink)}
+header.top .brand{font-family:"Archivo","Arial Narrow",sans-serif;font-weight:800;font-stretch:72%;font-size:19px;color:var(--ink)}
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+.intro{padding:44px 0 4px;border:0}
+.lede{color:var(--ink2);max-width:62ch;margin-top:14px;font-size:18px}
+.grid2{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:32px;align-items:start;margin-top:28px}
+@media(max-width:840px){.grid2{grid-template-columns:minmax(0,1fr);gap:20px}}
+figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px}
+figure svg{display:block;width:100%;height:auto}
+#cor{max-height:78vh}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.stack{display:flex;flex-direction:column;gap:18px}
+.toggles{display:flex;flex-wrap:wrap;gap:8px}
+label.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;background:var(--surface);font-size:15px;user-select:none}
+label.chip input{position:absolute;opacity:0;width:1px;height:1px}
+label.chip:has(input:checked){border-color:var(--drape);background:var(--drape-soft)}
+label.chip:has(input:focus-visible){outline:3px solid var(--violet);outline-offset:2px}
+.sw{width:14px;height:4px;border-radius:2px;display:inline-block}
+.small{font-size:15px;color:var(--ink2)}
+.readout{font-family:"Archivo","Arial Narrow",sans-serif;font-weight:800;font-stretch:74%;font-size:1.9rem;line-height:1.1}
+input[type=range]{width:100%;accent-color:var(--drape)}
+.rangeends{display:flex;justify-content:space-between;font-size:14px;color:var(--ink2)}
+.btn{font:inherit;border:1px solid var(--drape);background:var(--drape);color:var(--drape-ink);border-radius:8px;padding:9px 16px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--drape)}
+.btn:disabled{opacity:.5;cursor:default}
+:focus-visible{outline:3px solid var(--violet);outline-offset:2px}
+#infoT{margin-bottom:6px}
+.bone{fill:var(--bone);stroke:var(--bone-line);stroke-width:1.2}
+.resec{fill:var(--cut);opacity:.28}
+.cutline{stroke:var(--cut);stroke-width:2.2}
+.cutdash{stroke:var(--cut);stroke-width:2;stroke-dasharray:6 4}
+.lig{fill:none;stroke:var(--lig);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+.axis-mec{stroke:var(--violet);stroke-width:1.6;stroke-dasharray:7 5}
+.axis-anat{stroke:var(--ink2);stroke-width:1.4;stroke-dasharray:3 3}
+.axis-mik{stroke:var(--violet);stroke-width:2.4;stroke-linecap:round}
+.ref{stroke:var(--ink2);stroke-width:1;stroke-dasharray:2 4;opacity:.7}
+.hit{fill:transparent;stroke:transparent;cursor:pointer}
+.hitl{stroke:transparent;stroke-width:16;cursor:pointer;fill:none}
+.hit.sel{stroke:var(--violet);stroke-width:2;stroke-dasharray:4 3}
+.hitl.sel{stroke:var(--violet);stroke-opacity:.22}
+.svgt{font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-size:12px;fill:var(--ink2)}
+.svgth{font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-size:13px;font-weight:700;fill:var(--ink)}
+svg.no-eixos .lyr-eixos,svg.no-cortes .lyr-cortes,svg.no-lig .lyr-lig{display:none}
+.stepnav{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+.stepdot{font:inherit;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;font-weight:700}
+.stepdot[aria-current="step"]{background:var(--drape);color:var(--drape-ink);border-color:var(--drape)}
+.stepcard{margin-top:18px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 22px;align-items:start}
+.bignum{font-family:"Archivo","Arial Narrow",sans-serif;font-weight:800;font-stretch:62%;font-size:clamp(4rem,12vw,7rem);line-height:.85;color:var(--drape)}
+.stepcard h3{font-size:1.5rem;font-stretch:76%;font-weight:800;margin-bottom:8px}
+.notes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:16px}
+@media(max-width:640px){.notes{grid-template-columns:minmax(0,1fr)}.stepcard{grid-template-columns:minmax(0,1fr)}}
+.note{border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.note b{display:block;margin-bottom:4px;font-size:15px}
+.note.perola{background:var(--drape-soft);border-color:var(--drape)}
+.note.perola b{color:var(--drape)}
+.note.armadilha{background:var(--cut-soft);border-color:var(--cut)}
+.note.armadilha b{color:var(--cut)}
+.stepctl{display:flex;gap:10px;margin-top:18px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface);flex-wrap:wrap}
+.seg label{padding:8px 14px;cursor:pointer;font-size:15px;position:relative}
+.seg label+label{border-left:1px solid var(--line)}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg label:has(input:checked){background:var(--drape);color:var(--drape-ink)}
+.seg label:has(input:focus-visible){outline:3px solid var(--violet);outline-offset:-3px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field>span{font-weight:700;font-size:15px}
+#gapSol h3{font-size:1.35rem;font-stretch:78%;font-weight:800;margin-bottom:6px}
+.rule{border-left:0;margin-top:20px;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:10px;max-width:70ch}
+ol.rel{list-style:none;margin:20px 0 0;padding:0;counter-reset:r;display:grid;gap:10px;max-width:72ch}
+ol.rel li{counter-increment:r;display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+ol.rel li::before{content:counter(r);font-family:"Archivo","Arial Narrow",sans-serif;font-weight:800;font-stretch:66%;font-size:2rem;line-height:1;color:var(--lig)}
+ol.rel b{display:block}
+ol.rel span{color:var(--ink2);font-size:16px}
+.q{margin-top:26px;max-width:70ch}
+.q p.qt{font-weight:700;margin-bottom:10px}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:10px 14px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--drape)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--drape);background:var(--drape-soft)}
+.opt.wrong{border-color:var(--cut);background:var(--cut-soft)}
+.expl{margin-top:10px;color:var(--ink2)}
+.expl b{color:var(--ink)}
+#score{margin-top:28px}
+footer{padding:28px 0 48px;color:var(--ink2);font-size:15px}
+@media (prefers-reduced-motion:no-preference){#tib{transition:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<span class="brand">ATJ para o R1</span>
+<a href="#eixos">Eixos e cortes</a>
+<a href="#passos">Passo a passo</a>
+<a href="#sagital">Vista sagital</a>
+<a href="#gaps">Gaps</a>
+<a href="#partes-moles">Partes moles</a>
+<a href="#quiz">Quiz</a>
+</div></header>
+
+<main>
+<div class="wrap intro">
+<h1>Artroplastia total do joelho</h1>
+<p class="lede">Um guia para quem está começando: onde ficam os eixos, por que cada corte sai onde sai e como deixar o joelho estável em extensão e em flexão. Mexa nas figuras; é para isso que elas estão aqui.</p>
+</div>
+
+<section id="eixos" style="padding-top:28px">
+<div class="wrap">
+<h2>Eixos e cortes no plano coronal</h2>
+<p class="lede">Joelho em vista anterior, medial à esquerda. Arraste a deformidade, ligue e desligue as camadas e toque nas estruturas.</p>
+<div class="grid2">
+<figure>
+<svg id="cor" viewBox="110 0 260 545" role="img" aria-labelledby="corT corD">
+<title id="corT">Joelho em vista anterior com eixos, ligamentos colaterais e cortes da ATJ</title>
+<desc id="corD">Fêmur distal, tíbia proximal e fíbula. O eixo mecânico do fêmur é vertical; o eixo anatômico fica inclinado 5 a 7 graus. A linha de Mikulicz vai do quadril ao tornozelo e se desloca conforme a deformidade em varo ou valgo. Os cortes distal do fêmur e da tíbia aparecem como faixas ressecadas.</desc>
+<defs><clipPath id="fclip"><path d="M230 40 L280 40 L264 190 Q312 215 312 262 Q312 298 284 298 Q262 298 252 282 L222 282 Q212 300 188 300 Q158 300 158 262 Q160 215 210 190 Z"/></clipPath></defs>
+<path class="bone" d="M230 40 L280 40 L264 190 Q312 215 312 262 Q312 298 284 298 Q262 298 252 282 L222 282 Q212 300 188 300 Q158 300 158 262 Q160 215 210 190 Z"/>
+<g class="lyr-cortes"><rect class="resec" x="150" y="272" width="170" height="34" clip-path="url(#fclip)"/></g>
+<g id="tib">
+<path class="bone" d="M160 318 L312 318 Q316 342 290 356 L262 370 L260 500 L212 500 L210 370 L182 356 Q156 342 160 318 Z"/>
+<path class="bone" d="M298 352 Q306 342 318 350 L312 500 L300 500 Z"/>
+<g class="lyr-cortes"><polygon class="resec" points="160,318 312,318 313,332 159,332"/><line class="cutline" x1="140" y1="332" x2="336" y2="332"/></g>
+<line class="lyr-eixos axis-mec" x1="236" y1="318" x2="236" y2="512"/>
+<rect class="hit" data-k="tibia" x="162" y="312" width="148" height="56" rx="6"/>
+<rect class="hit" data-k="fibula" x="296" y="372" width="22" height="128" rx="4"/>
+<g class="lyr-cortes"><line class="hitl" data-k="corteTib" x1="140" y1="332" x2="336" y2="332"/></g>
+</g>
+<g class="lyr-lig">
+<path id="mcl" class="lig" d="M156 238 L152 320 L206 412"/>
+<path id="lcl" class="lig" d="M316 232 L324 300 L314 348"/>
+<path id="mclHit" class="hitl" data-k="lcm" d="M156 238 L152 320 L206 412"/>
+<path id="lclHit" class="hitl" data-k="lcl" d="M316 232 L324 300 L314 348"/>
+</g>
+<g class="lyr-eixos">
+<line class="axis-mec" x1="236" y1="10" x2="236" y2="309"/>
+<line class="axis-anat" x1="258" y1="30" x2="231" y2="250"/>
+<line id="mik" class="axis-mik" x1="236" y1="10" x2="236" y2="500"/>
+<line class="hitl" data-k="eixoMec" x1="236" y1="12" x2="236" y2="120"/>
+<line class="hitl" data-k="eixoAnat" x1="256" y1="46" x2="246" y2="128"/>
+<line id="mikHit" class="hitl" data-k="mik" x1="236" y1="380" x2="236" y2="500"/>
+</g>
+<g class="lyr-cortes"><line class="cutline" x1="140" y1="272" x2="336" y2="272"/><line class="hitl" data-k="corteFem" x1="140" y1="272" x2="336" y2="272"/></g>
+<ellipse class="hit" data-k="condMed" cx="190" cy="252" rx="28" ry="26"/>
+<ellipse class="hit" data-k="condLat" cx="284" cy="252" rx="26" ry="26"/>
+<text class="svgt" x="186" y="534" text-anchor="middle">Medial</text>
+<text class="svgt" x="290" y="534" text-anchor="middle">Lateral</text>
+</svg>
+</figure>
+<div class="stack">
+<div class="panel stack">
+<div>
+<div class="readout" id="defOut">8° de varo</div>
+<p class="small" id="hkaOut">Ângulo quadril-joelho-tornozelo de 172°</p>
+</div>
+<div>
+<label for="def" class="small" style="display:block;margin-bottom:4px">Deformidade no plano coronal</label>
+<input type="range" id="def" min="-10" max="15" step="1" value="8">
+<div class="rangeends"><span>10° de valgo</span><span>neutro</span><span>15° de varo</span></div>
+</div>
+<p id="mikOut">A linha de Mikulicz passa a cerca de 29 mm medial ao centro do joelho: o compartimento medial carrega quase toda a carga.</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+<button class="btn" id="fix" type="button">Corrigir com a ATJ</button>
+<span class="small" id="fixMsg"></span>
+</div>
+</div>
+<div class="toggles" aria-label="Camadas da figura">
+<label class="chip"><input type="checkbox" data-layer="eixos" checked><span class="sw" style="background:var(--violet)"></span>Eixos</label>
+<label class="chip"><input type="checkbox" data-layer="cortes" checked><span class="sw" style="background:var(--cut)"></span>Cortes</label>
+<label class="chip"><input type="checkbox" data-layer="lig" checked><span class="sw" style="background:var(--lig)"></span>Ligamentos</label>
+</div>
+<div class="panel" id="info" aria-live="polite">
+<h3 id="infoT">Toque numa estrutura</h3>
+<p id="infoP" class="small">Côndilos, platô, fíbula, ligamentos, eixos e linhas de corte são clicáveis. Cada um explica o que significa na hora da cirurgia.</p>
+</div>
+<p class="small">Os milímetros da linha de Mikulicz são estimados para um membro adulto médio; a figura encurta a tíbia para caber na tela.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="passos">
+<div class="wrap">
+<h2>Passo a passo</h2>
+<p class="lede">Na escola do alinhamento mecânico. Vale contar para ele que existem o cinemático e o restrito, mas a lógica se aprende melhor por aqui.</p>
+<div class="stepnav" role="group" aria-label="Etapas da cirurgia" id="stepnav"></div>
+<div class="stepcard" id="stepcard" aria-live="polite">
+<div class="bignum" id="stepNum">1</div>
+<div>
+<h3 id="stepTitle">Via de acesso e preparo</h3>
+<p id="stepText">Incisão mediana e artrotomia parapatelar medial. Lateralize ou everta a patela, retire meniscos, LCA (e LCP, se a prótese for PS) e osteófitos.</p>
+<div class="notes">
+<div class="note perola"><b>Pérola</b><span id="stepP">Tire os osteófitos antes de medir qualquer coisa: eles tensionam as partes moles e enganam o balanço.</span></div>
+<div class="note armadilha"><b>Armadilha</b><span id="stepA">Forçar a eversão da patela num joelho rígido arrisca avulsão do tendão patelar na TAT.</span></div>
+</div>
+<div class="stepctl"><button class="btn ghost" type="button" id="prev">Etapa anterior</button><button class="btn" type="button" id="next">Próxima etapa</button></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="sagital">
+<div class="wrap">
+<h2>Vista sagital: bloco 4 em 1, slope e LCP</h2>
+<p class="lede">Anterior à esquerda. O corte distal (linha contínua) já foi feito; o bloco 4 em 1 faz os cortes anterior, posterior e os dois chanfros (tracejados).</p>
+<div class="grid2">
+<figure>
+<svg id="sag" viewBox="130 0 230 470" role="img" aria-labelledby="sagT sagD">
+<title id="sagT">Joelho em vista sagital com os cortes femorais e o corte tibial com slope</title>
+<desc id="sagD">Fêmur distal, patela e tíbia em perfil. Linhas de corte do fêmur e uma linha de corte tibial cuja inclinação posterior muda com o controle de slope. Em modo CR aparece o LCP; em modo PS aparece o box femoral e o poste do polietileno.</desc>
+<path class="bone" d="M195 20 L252 20 L256 165 Q305 185 310 240 Q314 300 262 306 Q215 310 196 282 Q182 255 190 215 Z"/>
+<ellipse class="bone" cx="171" cy="238" rx="11" ry="27"/>
+<line x1="173" y1="211" x2="190" y2="120" stroke="var(--lig)" stroke-width="5" stroke-linecap="round" opacity=".85"/>
+<line x1="171" y1="265" x2="184" y2="350" stroke="var(--lig)" stroke-width="5" stroke-linecap="round" opacity=".85"/>
+<path class="bone" d="M184 320 L304 320 Q310 334 296 348 L272 362 L268 455 L224 455 L218 372 Q190 364 182 350 Q176 334 184 320 Z"/>
+<line class="cutline" x1="180" y1="290" x2="322" y2="290"/>
+<line class="cutdash" x1="197" y1="168" x2="197" y2="262"/>
+<line class="cutdash" x1="292" y1="196" x2="292" y2="272"/>
+<line class="cutdash" x1="197" y1="262" x2="216" y2="290"/>
+<line class="cutdash" x1="276" y1="290" x2="292" y2="272"/>
+<line class="ref" x1="168" y1="334" x2="326" y2="334"/>
+<line id="tibCut" class="cutline" x1="172" y1="334" x2="318" y2="345"/>
+<g id="crG"><line x1="288" y1="336" x2="252" y2="276" stroke="var(--lig)" stroke-width="5" stroke-linecap="round"/></g>
+<g id="psG" style="display:none"><rect x="236" y="258" width="34" height="32" fill="none" stroke="var(--violet)" stroke-width="2" stroke-dasharray="4 3"/><rect x="246" y="300" width="15" height="20" rx="3" fill="var(--violet)" opacity=".75"/></g>
+<text class="svgt" x="150" y="466">Anterior</text>
+<text class="svgt" x="338" y="466" text-anchor="end">Posterior</text>
+</svg>
+</figure>
+<div class="stack">
+<div class="panel stack">
+<div class="field"><span>Tipo de prótese</span>
+<div class="seg" role="radiogroup" aria-label="Tipo de prótese">
+<label><input type="radio" name="tipo" value="cr" checked>CR (preserva o LCP)</label>
+<label><input type="radio" name="tipo" value="ps">PS (posteroestabilizada)</label>
+</div></div>
+<div>
+<label for="slope" class="small" style="display:block;margin-bottom:4px">Slope posterior do corte tibial</label>
+<div class="readout" id="slopeOut">5°</div>
+<input type="range" id="slope" min="0" max="10" step="1" value="5">
+<div class="rangeends"><span>0°</span><span>10°</span></div>
+</div>
+<p id="slopeMsg">Slope dentro do esperado para uma CR. O LCP precisa de espaço em flexão para não ficar tenso.</p>
+</div>
+<div class="panel">
+<h3 style="margin-bottom:8px">Ordem no bloco 4 em 1</h3>
+<p class="small">Corte anterior, rente à cortical sem entalhar. Depois o posterior, que define o espaço em flexão. Por último, os chanfros anterior e posterior, que só acomodam o formato interno do componente. Se for PS, ainda vem o box intercondilar para o poste e came.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="gaps">
+<div class="wrap">
+<h2>Simulador de gaps</h2>
+<p class="lede">Escolha como o bloco espaçador entrou em extensão e em flexão. A figura mostra o espaço e a correção aparece embaixo.</p>
+<div class="rule"><p>A regra que resolve a tabela inteira: o corte da tíbia mexe nos dois espaços; o fêmur distal mexe só na extensão; o fêmur posterior (tamanho AP e rotação) mexe só na flexão. O polietileno, como fica na tíbia, também mexe nos dois.</p></div>
+<div class="grid2">
+<figure>
+<svg id="gapSvg" viewBox="0 0 360 212" role="img" aria-labelledby="gapT gapD">
+<title id="gapT">Espaços em extensão e em flexão com o bloco espaçador</title>
+<desc id="gapD">Dois painéis com fêmur em cima, tíbia embaixo e o bloco espaçador entre eles. O espaço aumenta ou diminui conforme a opção escolhida.</desc>
+<text class="svgth" x="90" y="16" text-anchor="middle">Extensão</text>
+<text class="svgth" x="270" y="16" text-anchor="middle">Flexão</text>
+<rect class="bone" x="20" y="24" width="140" height="50" rx="6"/>
+<rect class="bone" x="200" y="24" width="140" height="50" rx="6"/>
+<rect id="tE" class="bone" x="20" y="114" width="140" height="50" rx="6"/>
+<rect id="tF" class="bone" x="200" y="114" width="140" height="50" rx="6"/>
+<rect id="sE" x="40" y="74" width="100" height="40" fill="var(--drape-soft)" stroke="var(--drape)" stroke-width="2" stroke-dasharray="5 4"/>
+<rect id="sF" x="220" y="74" width="100" height="40" fill="var(--drape-soft)" stroke="var(--drape)" stroke-width="2" stroke-dasharray="5 4"/>
+<text id="lE" class="svgt" x="90" y="202" text-anchor="middle">Encaixe justo</text>
+<text id="lF" class="svgt" x="270" y="202" text-anchor="middle">Encaixe justo</text>
+</svg>
+</figure>
+<div class="stack">
+<div class="panel stack">
+<div class="field"><span>Em extensão, o bloco ficou</span>
+<div class="seg" role="radiogroup" aria-label="Extensão">
+<label><input type="radio" name="ext" value="a">Apertado</label>
+<label><input type="radio" name="ext" value="o" checked>Justo</label>
+<label><input type="radio" name="ext" value="f">Frouxo</label>
+</div></div>
+<div class="field"><span>Em flexão, o bloco ficou</span>
+<div class="seg" role="radiogroup" aria-label="Flexão">
+<label><input type="radio" name="flex" value="a">Apertado</label>
+<label><input type="radio" name="flex" value="o" checked>Justo</label>
+<label><input type="radio" name="flex" value="f">Frouxo</label>
+</div></div>
+</div>
+<div class="panel" id="gapSol" aria-live="polite">
+<h3 id="gapH">Balanceado</h3>
+<p id="gapP" class="small">Espaços iguais e retangulares. Siga para as provas.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="partes-moles">
+<div class="wrap">
+<h2>Liberação de partes moles</h2>
+<p class="lede">Primeiro deixe o espaço retangular com liberações, depois iguale extensão e flexão com os cortes. Teste depois de cada etapa: liberar demais é pior que liberar de menos.</p>
+<div class="seg" role="radiogroup" aria-label="Deformidade" style="margin-top:22px">
+<label><input type="radio" name="def2" value="varo" checked>Joelho varo</label>
+<label><input type="radio" name="def2" value="valgo">Joelho valgo</label>
+</div>
+<ol class="rel" id="relList" aria-live="polite"></ol>
+</div>
+</section>
+
+<section id="quiz">
+<div class="wrap">
+<h2>Quiz rápido</h2>
+<p class="lede">Seis perguntas para ver se a lógica ficou. A explicação aparece logo depois da resposta.</p>
+<div id="quizBox"></div>
+<div id="score" class="panel" style="max-width:70ch">
+<p id="scoreP">Responda as perguntas para ver o resultado.</p>
+<button class="btn ghost" type="button" id="resetQ" style="margin-top:10px">Refazer quiz</button>
+</div>
+</div>
+</section>
+</main>
+
+<footer><div class="wrap">
+<p>Material de ensino. Ângulos, espessuras e slope variam conforme o sistema de implante: na sala, vale a técnica do fabricante.</p>
+</div></footer>
+
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)};
+var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+var INFO={
+condMed:['Côndilo femoral medial','Maior e mais distal que o lateral. No joelho varo é o compartimento que gasta primeiro. Costuma ser a referência para medir os 9–10 mm do corte distal, porque é o côndilo mais proeminente.'],
+condLat:['Côndilo femoral lateral','Menor e mais curto posteriormente. No valgo costuma ser hipoplásico, então usar só a linha condilar posterior para a rotação tende a deixar o componente femoral em rotação interna.'],
+tibia:['Platô tibial','O medial é côncavo; o lateral, levemente convexo. O corte é medido a partir do lado menos gasto (cerca de 8–10 mm) ou uns 2 mm abaixo do fundo do defeito no lado gasto.'],
+fibula:['Fíbula','A cabeça da fíbula recebe o LCL e serve de referência para a altura da linha articular, cerca de 1,5 cm acima dela. O nervo fibular comum contorna o colo: atenção na correção de valgo grave.'],
+lcm:['Ligamento colateral medial','Principal estabilizador medial. No varo está retraído junto com a cápsula posteromedial, e é ali que a liberação acontece, em etapas.'],
+lcl:['Ligamento colateral lateral','Sai do epicôndilo lateral e vai à cabeça da fíbula. No valgo fica retraído junto com a banda iliotibial e o poplíteo.'],
+eixoMec:['Eixo mecânico','Do centro da cabeça femoral ao centro do tornozelo. No alinhamento mecânico clássico, os cortes do fêmur e da tíbia ficam perpendiculares a ele.'],
+eixoAnat:['Eixo anatômico do fêmur','Segue a diáfise, que é por onde entra a haste intramedular. Fica 5–7° em valgo em relação ao mecânico, e por isso o guia do corte distal é regulado nesse ângulo.'],
+mik:['Linha de Mikulicz','Linha de carga do membro inteiro, do quadril ao tornozelo. Mostra qual compartimento recebe a carga: medial no varo, lateral no valgo, central no membro alinhado.'],
+corteFem:['Corte distal do fêmur','Perpendicular ao eixo mecânico, tirando a espessura do componente (cerca de 9–10 mm). Mexe só no espaço em extensão.'],
+corteTib:['Corte da tíbia','Perpendicular ao eixo da tíbia no plano coronal, com o slope que o implante pede. Mexe nos dois espaços, em flexão e em extensão.']
+};
+function showInfo(k){
+ var d=INFO[k]; if(!d)return;
+ $('#infoT').textContent=d[0]; $('#infoP').textContent=d[1];
+ $$('#cor [data-k]').forEach(function(e){e.classList.toggle('sel',e.getAttribute('data-k')===k)});
+}
+$$('#cor [data-k]').forEach(function(el){
+ var k=el.getAttribute('data-k');
+ el.setAttribute('tabindex','0'); el.setAttribute('role','button'); el.setAttribute('aria-label',INFO[k][0]);
+ el.addEventListener('click',function(){showInfo(k)});
+ el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();showInfo(k)}});
+});
+$$('[data-layer]').forEach(function(cb){
+ cb.addEventListener('change',function(){$('#cor').classList.toggle('no-'+cb.getAttribute('data-layer'),!cb.checked)});
+});
+
+function rot(p,c,a){var r=a*Math.PI/180,dx=p[0]-c[0],dy=p[1]-c[1];return [c[0]+dx*Math.cos(r)-dy*Math.sin(r),c[1]+dx*Math.sin(r)+dy*Math.cos(r)]}
+function f1(n){return n.toFixed(1)}
+var theta=8;
+function setDef(t){
+ theta=t;
+ var piv=t>=0?[188,318]:[284,318];
+ $('#tib').setAttribute('transform','rotate('+f1(t)+' '+piv[0]+' '+piv[1]+')');
+ var m1=rot([152,320],piv,t),m2=rot([206,412],piv,t),l2=rot([314,348],piv,t);
+ var dm='M156 238 L'+f1(m1[0])+' '+f1(m1[1])+' L'+f1(m2[0])+' '+f1(m2[1]);
+ var dl='M316 232 L324 300 L'+f1(l2[0])+' '+f1(l2[1]);
+ $('#mcl').setAttribute('d',dm); $('#mclHit').setAttribute('d',dm);
+ $('#lcl').setAttribute('d',dl); $('#lclHit').setAttribute('d',dl);
+ var A=rot([236,500],piv,t),H=[236,-700];
+ function xAt(y){return H[0]+(A[0]-H[0])*(y-H[1])/(A[1]-H[1])}
+ var mk=$('#mik'); mk.setAttribute('x1',f1(xAt(10))); mk.setAttribute('y1','10'); mk.setAttribute('x2',f1(A[0])); mk.setAttribute('y2',f1(A[1]));
+ var mh=$('#mikHit'); mh.setAttribute('x1',f1(xAt(380))); mh.setAttribute('y1','380'); mh.setAttribute('x2',f1(A[0])); mh.setAttribute('y2',f1(A[1]));
+ var a=Math.round(Math.abs(t));
+ var mad=Math.round(206*Math.sin(Math.abs(t)*Math.PI/180));
+ if(a===0){
+  $('#defOut').textContent='Membro neutro';
+  $('#hkaOut').textContent='Ângulo quadril-joelho-tornozelo de 180°';
+  $('#mikOut').textContent='A linha de Mikulicz passa pelo centro do joelho: a carga se divide entre os compartimentos.';
+ } else {
+  var varo=t>0;
+  $('#defOut').textContent=a+'° de '+(varo?'varo':'valgo');
+  $('#hkaOut').textContent='Ângulo quadril-joelho-tornozelo de '+(180-a)+'°';
+  var lado=varo?'medial':'lateral';
+  var carga=mad<10?'a carga ainda fica perto do centro.':(mad<22?'o compartimento '+lado+' passa a carregar mais.':'o compartimento '+lado+' carrega quase toda a carga.');
+  $('#mikOut').textContent='A linha de Mikulicz passa a cerca de '+mad+' mm '+lado+' ao centro do joelho: '+carga;
+ }
+}
+var defIn=$('#def');
+defIn.addEventListener('input',function(){setDef(parseFloat(defIn.value));$('#fixMsg').textContent=''});
+$('#fix').addEventListener('click',function(){
+ var start=theta; if(Math.abs(start)<0.01){$('#fixMsg').textContent='O membro já está neutro.';return}
+ var btn=this; btn.disabled=true;
+ var dur=reduce?0:900,t0=performance.now();
+ function step(now){
+  var k=dur?Math.min(1,(now-t0)/dur):1;
+  var e=1-Math.pow(1-k,3);
+  setDef(start*(1-e));
+  if(k<1){requestAnimationFrame(step)} else {
+   setDef(0); defIn.value=0; btn.disabled=false;
+   $('#fixMsg').textContent='Cortes perpendiculares ao eixo mecânico e espaços balanceados devolvem o membro ao neutro.';
+  }
+ }
+ requestAnimationFrame(step);
+});
+setDef(8);
+
+var STEPS=[
+['Via de acesso e preparo','Incisão mediana e artrotomia parapatelar medial. Lateralize ou everta a patela, retire meniscos, LCA (e LCP, se a prótese for PS) e osteófitos.','Tire os osteófitos antes de medir qualquer coisa: eles tensionam as partes moles e enganam o balanço.','Forçar a eversão da patela num joelho rígido arrisca avulsão do tendão patelar na TAT.'],
+['Corte distal do fêmur','Haste intramedular com entrada cerca de 1 cm anterior à origem do LCP, levemente medial ao centro do intercôndilo. Guia em 5–7° de valgo, retirando a espessura do componente a partir do côndilo mais proeminente.','Abrir o canal com a broca e aspirar antes de passar a haste diminui o risco de embolia gordurosa.','Ponto de entrada fora do lugar desvia a haste e muda o ângulo real do corte, mesmo com o guia regulado certo.'],
+['Corte da tíbia','Guia extramedular alinhado ao centro do tornozelo e ao terço medial da TAT. Perpendicular ao eixo da tíbia no plano coronal, com o slope que o implante pede.','Proteja o tendão patelar, o LCP (se CR) e as estruturas posteriores com afastadores enquanto a serra trabalha.','Deixar o corte tibial em varo é um dos erros de alinhamento mais ligados à soltura precoce do componente.'],
+['Tamanho e rotação do fêmur','Meça o AP com referência anterior ou posterior, conforme o sistema. Rotação externa de cerca de 3° em relação aos côndilos posteriores, paralela à linha transepicondilar e perpendicular à linha de Whiteside. Depois vem o bloco 4 em 1.','Confira as três referências de rotação entre si. Quando discordam, desconfie da linha condilar posterior, principalmente no valgo.','Entalhe (notching) da cortical anterior por componente pequeno demais aumenta o risco de fratura supracondiliana.'],
+['Balanço dos espaços','Teste extensão e flexão com o bloco espaçador. Os dois espaços precisam ficar retangulares e do mesmo tamanho. Corrija com liberações ou com cortes, como no simulador mais abaixo.','Primeiro deixe retangular (liberação), depois iguale (cortes).','Resolver tudo com polietileno mais grosso sobe a linha articular: patela baixa e instabilidade em médio-flexão.'],
+['Provas, patela e cimentação','Box (se PS), componentes de prova, amplitude de movimento completa, estabilidade em 0°, 30° e 90° e trajeto patelar sem polegar. Decida o recapeamento patelar, cimente e coloque o polietileno definitivo.','Restaure a espessura original da patela: tire de osso o mesmo que o botão vai repor.','Patela saindo do trilho quase sempre é rotação interna de algum componente. Volte e corrija a rotação antes de pensar em liberar o retináculo lateral.']
+];
+var cur=0,nav=$('#stepnav');
+STEPS.forEach(function(s,i){
+ var b=document.createElement('button'); b.type='button'; b.className='stepdot'; b.textContent=i+1;
+ b.setAttribute('aria-label','Etapa '+(i+1)+': '+s[0]);
+ b.addEventListener('click',function(){goStep(i)}); nav.appendChild(b);
+});
+function goStep(i){
+ cur=i; var s=STEPS[i];
+ $('#stepNum').textContent=i+1; $('#stepTitle').textContent=s[0]; $('#stepText').textContent=s[1];
+ $('#stepP').textContent=s[2]; $('#stepA').textContent=s[3];
+ $$('.stepdot').forEach(function(b,j){if(j===i){b.setAttribute('aria-current','step')}else{b.removeAttribute('aria-current')}});
+ $('#prev').disabled=i===0; $('#next').textContent=i===STEPS.length-1?'Voltar ao início':'Próxima etapa';
+}
+$('#prev').addEventListener('click',function(){if(cur>0)goStep(cur-1)});
+$('#next').addEventListener('click',function(){goStep(cur===STEPS.length-1?0:cur+1)});
+goStep(0);
+
+function updSlope(){
+ var s=parseInt($('#slope').value,10),ps=document.querySelector('input[name="tipo"]:checked').value==='ps';
+ var tn=Math.tan(s*Math.PI/180);
+ var c=$('#tibCut'); c.setAttribute('y1',f1(334-12*tn)); c.setAttribute('y2',f1(334+134*tn));
+ $('#slopeOut').textContent=s+'°';
+ $('#crG').style.display=ps?'none':''; $('#psG').style.display=ps?'':'none';
+ var m;
+ if(ps){m=s>3?'Slope alto para uma PS: afrouxa a flexão e facilita o poste escapar do came. A maioria dos sistemas PS pede algo entre 0° e 3°.':'Slope adequado para uma PS. O LCP foi retirado, então o poste e o came fazem o papel dele em flexão.'}
+ else{m=s<3?'Slope baixo para uma CR: a flexão tende a ficar apertada e o LCP, tenso, com risco de levantar o polietileno anteriormente.':(s>7?'Slope alto mesmo para uma CR: a flexão pode ficar frouxa. Confira o que o sistema recomenda.':'Slope dentro do esperado para uma CR. O LCP precisa de espaço em flexão para não ficar tenso.')}
+ $('#slopeMsg').textContent=m;
+}
+$('#slope').addEventListener('input',updSlope);
+$$('input[name="tipo"]').forEach(function(r){r.addEventListener('change',updSlope)});
+updSlope();
+
+var GH={a:28,o:40,f:54},GL={a:'Bloco não entra',o:'Encaixe justo',f:'Sobra espaço'};
+var SOL={
+aa:['Cortar mais tíbia','Os dois espaços estão apertados na mesma medida. A tíbia participa dos dois, então mais corte tibial abre extensão e flexão juntas.'],
+ao:['Liberar a cápsula posterior e tirar osteófitos posteriores','Só a extensão está apertada, então o problema está em algo que só atua em extensão. Se a liberação não bastar, corte mais 2 mm de fêmur distal.'],
+af:['Cortar mais fêmur distal e usar polietileno mais grosso','Mais fêmur distal abre só a extensão; o polietileno mais grosso fecha os dois e corrige a flexão frouxa.'],
+oa:['Componente femoral menor ou mais slope tibial','Só a flexão está apertada. Reduzir o AP do fêmur posterior ou inclinar mais a tíbia abre a flexão sem mexer na extensão. Na CR, considere também recessão do LCP.'],
+oo:['Balanceado','Espaços iguais e retangulares. Siga para as provas.'],
+of:['Componente femoral maior','Só a flexão está frouxa, e é a instabilidade mais mal tolerada. Aumentar o fêmur posterior fecha só a flexão. Alternativa: cortar mais fêmur distal e usar polietileno mais grosso.'],
+fa:['Componente femoral menor e polietileno mais grosso','O fêmur menor abre a flexão; o polietileno mais grosso fecha os dois e corrige a extensão frouxa.'],
+fo:['Aumento (augment) distal no fêmur','Só a extensão está frouxa. Repor osso no fêmur distal fecha a extensão sem tocar na flexão. Compensar com polietileno apertaria a flexão.'],
+ff:['Polietileno mais grosso','Os dois espaços estão igualmente frouxos, e o polietileno fecha ambos na mesma medida.']
+};
+function paintGap(t,s,l,v){
+ var h=GH[v]; $(t).setAttribute('y',74+h);
+ var col=v==='a'?'var(--cut)':(v==='f'?'var(--lig)':'var(--drape)');
+ var fill=v==='a'?'var(--cut-soft)':(v==='f'?'var(--lig-soft)':'var(--drape-soft)');
+ $(s).setAttribute('stroke',col); $(s).setAttribute('fill',fill); $(s).setAttribute('opacity',v==='a'?'.85':'1');
+ $(l).textContent=GL[v];
+}
+function updGap(){
+ var e=document.querySelector('input[name="ext"]:checked').value,f=document.querySelector('input[name="flex"]:checked').value;
+ paintGap('#tE','#sE','#lE',e); paintGap('#tF','#sF','#lF',f);
+ var s=SOL[e+f]; $('#gapH').textContent=s[0]; $('#gapP').textContent=s[1];
+}
+$$('input[name="ext"],input[name="flex"]').forEach(function(r){r.addEventListener('change',updGap)});
+updGap();
+
+var REL={
+varo:[['Osteófitos mediais do fêmur e da tíbia','Sozinhos já corrigem boa parte do varo leve.'],['LCM profundo e cápsula medial','Descolamento subperiosteal da tíbia proximal.'],['Canto posteromedial e semimembranoso','Atua mais em extensão.'],['LCM superficial','Pie-crust ou liberação distal. As fibras anteriores ficam tensas em flexão.']],
+valgo:[['Osteófitos laterais','Primeiro passo, como no varo.'],['Cápsula posterolateral','Atua mais em extensão.'],['Banda iliotibial','Tensa em extensão; pie-crust ou liberação no tubérculo de Gerdy.'],['Tendão do poplíteo','Tenso em flexão.'],['LCL','Último recurso, porque mexe em flexão e extensão. Na correção de valgo grave com contratura em flexão, lembre do nervo fibular.']]
+};
+function updRel(){
+ var v=document.querySelector('input[name="def2"]:checked').value,ol=$('#relList'); ol.innerHTML='';
+ REL[v].forEach(function(r){var li=document.createElement('li'),d=document.createElement('div'),b=document.createElement('b'),sp=document.createElement('span');b.textContent=r[0];sp.textContent=r[1];d.appendChild(b);d.appendChild(sp);li.appendChild(d);ol.appendChild(li)});
+}
+$$('input[name="def2"]').forEach(function(r){r.addEventListener('change',updRel)});
+updRel();
+
+var QZ=[
+['O corte distal do fêmur fica perpendicular a qual eixo?',['Eixo anatômico do fêmur','Eixo mecânico','Linha transepicondilar','Eixo da tíbia'],1,'A haste segue o eixo anatômico, mas o guia é regulado em 5–7° de valgo justamente para o corte sair perpendicular ao eixo mecânico.'],
+['Qual corte mexe nos espaços de flexão e de extensão ao mesmo tempo?',['Distal do fêmur','Posterior do fêmur','Tíbia','Chanfro anterior'],2,'A tíbia está embaixo nos dois espaços. O fêmur distal só aparece em extensão; o posterior, só em flexão.'],
+['Extensão justa e flexão frouxa. Qual a correção mais direta?',['Polietileno mais grosso','Componente femoral maior','Cortar mais tíbia','Augment distal no fêmur'],1,'O fêmur maior preenche o espaço posterior e fecha só a flexão. Polietileno mais grosso apertaria também a extensão.'],
+['Joelho varo, espaço medial apertado em extensão e em flexão. Por onde começar?',['LCM superficial','Osteófitos mediais','Banda iliotibial','Tendão do poplíteo'],1,'Os osteófitos mediais tensionam o LCM. Tirá-los é o primeiro passo e, no varo leve, muitas vezes basta.'],
+['No valgo com côndilo lateral hipoplásico, confiar só na linha condilar posterior tende a deixar o componente femoral em:',['Rotação interna','Rotação externa','Flexão','Varo'],0,'O côndilo posterior lateral curto inclina a referência. Somar 3° pode não compensar, por isso se confere com a transepicondilar e a linha de Whiteside.'],
+['Na prova, a patela sai do trilho em flexão. O que conferir antes de liberar o retináculo lateral?',['Espessura do polietileno','Rotação dos componentes','Slope tibial','Altura do botão patelar'],1,'Rotação interna do fêmur ou da tíbia é a causa mais comum de mau trajeto patelar após ATJ.']
+];
+var answered=0,right=0,box=$('#quizBox');
+function buildQuiz(){
+ box.innerHTML=''; answered=0; right=0; $('#scoreP').textContent='Responda as perguntas para ver o resultado.';
+ QZ.forEach(function(q,qi){
+  var w=document.createElement('div'); w.className='q';
+  var p=document.createElement('p'); p.className='qt'; p.textContent=(qi+1)+'. '+q[0]; w.appendChild(p);
+  var o=document.createElement('div'); o.className='opts'; o.setAttribute('role','group'); o.setAttribute('aria-label','Pergunta '+(qi+1));
+  var ex=document.createElement('p'); ex.className='expl'; ex.setAttribute('aria-live','polite');
+  q[1].forEach(function(txt,oi){
+   var b=document.createElement('button'); b.type='button'; b.className='opt'; b.textContent=txt;
+   b.addEventListener('click',function(){
+    var bs=o.querySelectorAll('button'); for(var i=0;i<bs.length;i++){bs[i].disabled=true}
+    bs[q[2]].classList.add('right'); var ok=oi===q[2]; if(!ok){b.classList.add('wrong')}
+    ex.innerHTML=''; var bb=document.createElement('b'); bb.textContent=ok?'Isso. ':'Não foi dessa vez. '; ex.appendChild(bb); ex.appendChild(document.createTextNode(q[3]));
+    answered++; if(ok)right++;
+    if(answered===QZ.length){$('#scoreP').textContent='Você acertou '+right+' de '+QZ.length+'.'+(right===QZ.length?' A lógica dos eixos e dos espaços está firme.':' Vale revisar o simulador de gaps e as referências de rotação.')}
+   });
+   o.appendChild(b);
+  });
+  w.appendChild(o); w.appendChild(ex); box.appendChild(w);
+ });
+}
+$('#resetQ').addEventListener('click',buildQuiz);
+buildQuiz();
+})();
+</script>
+</body>
+</html>
