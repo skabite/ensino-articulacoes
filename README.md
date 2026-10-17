@@ -6,7 +6,9 @@ Páginas interativas para ensino de anatomia, semiologia e técnica cirúrgica d
 
 - `index.html`: página inicial com a lista de materiais
 - `joelho-atj/`: artroplastia total do joelho (eixos, cortes, gaps, partes moles, quiz)
-- `semiologia/`: semiologia ortopédica na APS — consulta rápida com bandeiras vermelhas, exame dirigido, diagnósticos, conduta inicial, critérios de imagem e encaminhamento
+- `semiologia/`: semiologia ortopédica na APS — consulta rápida com bandeiras vermelhas, exame dirigido, diagnósticos, conduta inicial, critérios de imagem e testes com demonstrações 3D
+
+O **referenciamento** não está nesta versão; entra em uma fase futura.
 
 ## Status do material de semiologia
 

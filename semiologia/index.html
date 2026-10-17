@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Semiologia ortopédica na APS</title>
-<meta name="description" content="Consulta rápida de semiologia ortopédica para profissionais da atenção primária: bandeiras vermelhas, exame dirigido, diagnósticos, conduta e encaminhamento.">
+<meta name="description" content="Consulta rápida de semiologia ortopédica para profissionais da atenção primária: bandeiras vermelhas, exame dirigido, diagnósticos, conduta e imagem.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦴</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,6 +96,8 @@ header.top .bar{gap:8px}
 .searchbox{order:3;flex-basis:100%;max-width:none;margin-left:0}
 }
 /* home */
+.review-banner{background:var(--warn-soft);border:1px solid var(--warn);border-radius:12px;padding:10px 14px;font-size:14px;line-height:1.5;color:var(--warn-ink);margin-top:18px}
+.review-banner strong{color:var(--warn-ink)}
 .hero{padding:42px 0 26px}
 .eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--drape);margin-bottom:10px}
 h1{font-family:"Archivo","Arial Narrow",system-ui,sans-serif;font-weight:800;font-stretch:72%;font-size:clamp(2.4rem,7vw,4.4rem);line-height:1.02;letter-spacing:-.01em;max-width:18ch}
@@ -259,7 +261,7 @@ main[data-mode="estudo"] .consulta-only{display:none}
 .panel ul{margin:0;padding-left:18px}
 .panel li{font-size:14px;margin:3px 0}
 /* 30 seconds */
-.em30{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.em30{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 @media(max-width:900px){.em30{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.em30{grid-template-columns:1fr}}
 .em30 .mini{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:12px}
@@ -408,7 +410,6 @@ a[href^="http"]::after{content:" (" attr(href) ")";font-size:8pt;word-break:brea
 <a href="#/imagem">Imagem</a>
 <a href="#/regras">Regras</a>
 <a href="#/conduta">Conduta</a>
-<a href="#/encaminhar">Encaminhar</a>
 <button type="button" id="theme" aria-label="Alternar tema">Tema</button>
 </nav>
 </div>
@@ -2294,7 +2295,6 @@ function buildIndex(){
   (r.diagnosticos||[]).forEach(function(d){addIndex('Diagnóstico',d.nome,typeof d.pistas==='string'?d.pistas:(d.pistas||[]).join(' '),'#/'+r.id+'/dx/'+d.id,d.nome+' '+(d.pistas||[]).join(' '))});
   (r.anamnese||[]).forEach(function(q){addIndex('Anamnese',q.pergunta,q.porQue,'#/'+r.id+'/anamnese',q.pergunta+' '+q.porQue)});
   addIndex('Seção',r.nome+' — imagem','Radiografia, ultrassom e ressonância.','#/'+r.id+'/imagem','imagem radiografia ultrassom ressonância');
-  addIndex('Seção',r.nome+' — encaminhamento','Critérios e checklist do encaminhamento.','#/'+r.id+'/encaminhamento','encaminhamento referência contrarreferência');
   addIndex('Seção',r.nome+' — fluxo rápido','Fluxo de decisão.','#/'+r.id+'/fluxo','fluxo decisão');
   addIndex('Seção',r.nome+' — pérolas e armadilhas','Erros comuns.','#/'+r.id+'/perolas','pérolas armadilhas erros');
  });
@@ -2302,7 +2302,6 @@ function buildIndex(){
  (DATA.referencias||[]).forEach(function(r){addIndex('Referência',r.titulo,r.autores+' '+r.ano,'#/referencias',r.autores+' '+r.titulo+' '+r.veiculo)});
  addIndex('Página','Regras de decisão','Ottawa tornozelo e joelho; quando pedir radiografia.','#/regras','ottawa tornozelo joelho radiografia regra de decisão');
  addIndex('Página','Conduta inicial','Controle da dor, exercícios e o que evitar, conforme protocolo local.','#/conduta','controle da dor conduta exercício');
- addIndex('Página','Como encaminhar','Prioridades, destinos e checklist do encaminhamento.','#/encaminhar','encaminhamento prioridade teleconsultoria referência');
  addIndex('Página','Como ler Sn/Sp','Sensibilidade, especificidade e intervalos de confiança.','#/sn-sp','sensibilidade especificidade sn sp lr intervalo de confiança');
  addIndex('Página','Sobre','Aviso, versão, licença e status de revisão.','#/sobre','sobre aviso licença versão revisão');
 }
@@ -2414,7 +2413,6 @@ function guiaResult(r){
   '<div class="guia-block red"><h3>Não perder</h3>'+bullets(res.naoPerder)+'</div>'+
   '<div class="guia-block"><h3>Exame agora</h3>'+bullets(res.exame)+'</div>'+
   '<div class="guia-block green"><h3>Conduta inicial</h3>'+bullets(res.conduta)+'</div>'+
-  '<div class="guia-block"><h3>Encaminhar se</h3>'+bullets(res.encaminhar)+'</div>'+
   (tests?'<p class="guia-tests">Testes: '+tests+'</p>':'')+
   '<div class="guia-foot"><button class="btn" type="button" data-goto-mode="estudo" data-goto="'+esc(res.ancora||'exame')+'">Ver ficha completa</button><button class="btn ghost" type="button" id="guiaBack">Mudar respostas</button><button class="btn ghost" type="button" id="guiaReset">Recomeçar</button></div>'+
   (summary?'<details class="guia-answers"><summary>Ver respostas</summary><p>'+summary+'</p></details>':'')+
@@ -2466,15 +2464,15 @@ function pageHome(){
   '<a class="global-card alerta" href="#/bandeiras"><h3>Bandeiras vermelhas</h3><p>O que não perder em qualquer região, em uma página só.</p></a>'+
   '<a class="global-card" href="#/regras"><h3>Regras de decisão</h3><p>Ottawa tornozelo e joelho, com critérios e ressalvas.</p></a>'+
   '<a class="global-card" href="#/conduta"><h3>Conduta inicial</h3><p>Controle da dor, carga, exercícios e o que evitar.</p></a>'+
-  '<a class="global-card" href="#/encaminhar"><h3>Como encaminhar</h3><p>Prioridades e checklist do encaminhamento.</p></a>'+
   '<a class="global-card" href="#/evidencia"><h3>Evidência dos testes</h3><p>Sn/Sp, fontes e limitações em uma página.</p></a>'+
   '<a class="global-card" href="#/imagem"><h3>Utilidade da imagem</h3><p>Quando pedir e o que os assintomáticos mostram.</p></a>'+
   '<a class="global-card" href="#/sn-sp"><h3>Como ler Sn/Sp</h3><p>O que um teste pode e não pode dizer na APS.</p></a>'+
   '<a class="global-card" href="#/referencias"><h3>Referências</h3><p>Fontes, links e data da última revisão.</p></a>';
  var chips=['dor no ombro','joelho que trava','lombalgia','entorse de tornozelo','formigamento na mão'].map(function(q){return '<button class="chip" type="button" data-q="'+esc(q)+'">'+esc(q)+'</button>'}).join('');
  return '<div class="wrap">'+
+  '<div class="review-banner"><strong>Versão para revisão clínica.</strong> Conteúdo preliminar, em validação pelo autor. Não usar como protocolo assistencial.</div>'+
   '<section class="hero"><div class="eyebrow">Consulta rápida · Atenção primária</div><h1>Semiologia ortopédica na APS</h1>'+
-  '<p>Escolha a região, responda poucas perguntas e receba o essencial: o que não perder, como examinar, o que fazer e quando encaminhar. A ficha completa fica a um toque.</p>'+
+  '<p>Escolha a região, responda poucas perguntas e receba o essencial: o que não perder, como examinar, o que fazer e quando reavaliar. A ficha completa fica a um toque.</p>'+
   '<div class="hero-cta"><a class="btn" href="#/testes">Testes e manobras</a><a class="btn ghost" href="#/ombro">Consulta guiada — ombro</a><a class="btn ghost" href="#/joelho">Consulta guiada — joelho</a></div>'+
   '<div class="chips" aria-label="Queixas frequentes">'+chips+'</div></section>'+
   '<div class="section-title"><h2>Por região</h2><span>8 fichas · ombro e joelho</span></div><div class="grid">'+cards+'</div>'+
@@ -2484,7 +2482,7 @@ function pageHome(){
 }
 function pageRegiao(r){
  if(r.status==='em-breve'||!r.em30s)return pageEmBreve(r);
- var secs=[['em30s','Em 30 segundos'],['bandeiras','Bandeiras'],['anamnese','Anamnese'],['exame','Exame'],['diagnosticos','Diagnósticos'],['fluxo','Fluxo'],['imagem','Imagem'],['encaminhamento','Encaminhamento'],['perolas','Pérolas'],['referencias','Referências']];
+ var secs=[['em30s','Em 30 segundos'],['bandeiras','Bandeiras'],['anamnese','Anamnese'],['exame','Exame'],['diagnosticos','Diagnósticos'],['fluxo','Fluxo'],['imagem','Imagem'],['perolas','Pérolas'],['referencias','Referências']];
  var nav=secs.map(function(s){return '<a href="#/'+esc(r.id)+'/'+s[0]+'">'+esc(s[1])+'</a>'}).join('');
  var rev=r.revisao||{};
  return '<div class="wrap">'+
@@ -2493,7 +2491,7 @@ function pageRegiao(r){
   '<div class="actions"><div class="mode" role="group" aria-label="Modo de leitura"><button type="button" data-mode="consulta" aria-pressed="true">Consulta</button><button type="button" data-mode="estudo" aria-pressed="false">Ficha completa</button></div><button class="btn ghost" type="button" id="btnEvidence" aria-pressed="false">Mostrar evidência</button><button class="btn ghost" type="button" id="btnPrint">Imprimir ficha</button><a class="btn danger" href="#/bandeiras">Bandeiras vermelhas</a></div></div>'+
   '<nav class="subnav" aria-label="Seções da ficha"><div class="wrap">'+nav+'</div></nav>'+
   '<section class="sec guia" id="guia"><div class="guia-wrap" id="guiaBox" aria-live="polite"></div></section>'+
-  '<div id="conteudo">'+renderBandeiras(r)+renderEm30(r)+renderFluxo(r)+renderDiagnosticos(r)+renderImagem(r)+renderEncaminhamento(r)+renderPerolas(r)+renderAnamnese(r)+renderExame(r)+renderRefs(r)+'</div>'+
+  '<div id="conteudo">'+renderBandeiras(r)+renderEm30(r)+renderFluxo(r)+renderDiagnosticos(r)+renderImagem(r)+renderPerolas(r)+renderAnamnese(r)+renderExame(r)+renderRefs(r)+'</div>'+
   '</div>';
 }
 function pageEmBreve(r){
@@ -2506,7 +2504,6 @@ function renderEm30(r){
   '<div class="mini red"><h3>Não perder</h3>'+bullets(e.naoPerder)+'</div>'+
   '<div class="mini"><h3>Exame-chave</h3>'+bullets(e.exame)+'</div>'+
   '<div class="mini green"><h3>Conduta inicial</h3>'+bullets(e.conduta)+'</div>'+
-  '<div class="mini"><h3>Encaminhar</h3>'+bullets(e.encaminhar)+'</div>'+
   '</div></section>';
 }
 function renderBandeiras(r){
@@ -2545,7 +2542,6 @@ function renderDiagnosticos(r){
    (d.testes?'<div class="dxrow"><b>Testes</b><div>'+esc(d.testes)+'</div></div>':'')+
    '<div class="dxrow"><b>Conduta</b><div>'+bullets(d.conduta)+'</div></div>'+
    '<div class="dxrow"><b>Imagem</b><div>'+bullets(d.imagem)+'</div></div>'+
-   '<div class="dxrow"><b>Encaminhar</b><div>'+bullets(d.encaminhamento)+'</div></div>'+
    (d.refs?refLine(d.refs):'')+'</article>';
  }).join('')+'</section>';
 }
@@ -2623,7 +2619,7 @@ function pageReferencias(){
 }
 function pageSobre(){
  var m=DATA.meta;
- return '<div class="wrap"><div class="regiao-head"><a class="crumb" href="#/">← Início</a><h1>Sobre</h1><p class="lede">O que é este material, para quem serve e em que estado está.</p></div><section class="sec"><div class="panel"><h3>O que é</h3><p style="font-size:15px">Consulta rápida de semiologia ortopédica para profissionais da atenção primária. Reúne bandeiras vermelhas, exame dirigido, diagnósticos comuns, conduta inicial, critérios de imagem e encaminhamento.</p></div>'+
+ return '<div class="wrap"><div class="regiao-head"><a class="crumb" href="#/">← Início</a><h1>Sobre</h1><p class="lede">O que é este material, para quem serve e em que estado está.</p></div><section class="sec"><div class="panel"><h3>O que é</h3><p style="font-size:15px">Consulta rápida de semiologia ortopédica para profissionais da atenção primária. Reúne bandeiras vermelhas, exame dirigido, diagnósticos comuns, conduta inicial e critérios de imagem. O referenciamento entra em uma fase futura.</p></div>'+
  '<div class="panel"><h3>Status</h3><ul><li>Versão: '+esc(m.versao)+'.</li><li>Status: '+esc(m.status)+'.</li><li>Última atualização: '+esc(m.revisadoEm)+'.</li><li>As fichas só recebem “revisado” depois da revisão clínica do Luis.</li></ul></div>'+
  '<div class="panel"><h3>Aviso</h3><p style="font-size:15px">'+esc(m.aviso)+'</p></div>'+
  '<div class="panel"><h3>Como citar</h3><p style="font-size:15px">Semiologia ortopédica na APS, versão '+esc(m.versao)+', '+esc(m.revisadoEm)+'. Material educativo.</p></div>'+
@@ -2648,7 +2644,7 @@ function renderJobeDemo(){
    '<div class="actions"><button class="btn" type="button" id="jobeAnimate">Animar o teste</button><button class="btn ghost" type="button" id="jobeReset">Voltar ao início</button></div>'+
   '</div><div class="panel"><h3>Como fazer</h3><ol class="steps">'+steps+'</ol></div></div>'+
  '</div>'+
- '<div class="demo-result"><div class="panel do"><h3>Dor sem fraqueza</h3><p>Tendinopatia ou dor subacromial. Tratamento conservador e reavaliação.</p></div><div class="panel dont"><h3>Dor com fraqueza</h3><p>Suspeita de ruptura parcial ou total. Considere imagem e encaminhamento.</p></div></div>'+
+ '<div class="demo-result"><div class="panel do"><h3>Dor sem fraqueza</h3><p>Tendinopatia ou dor subacromial. Tratamento conservador e reavaliação.</p></div><div class="panel dont"><h3>Dor com fraqueza</h3><p>Suspeita de ruptura parcial ou total. Considere imagem e reavaliação especializada.</p></div></div>'+
  '<p class="small" style="margin-top:10px">A dor pode limitar a força. Compare com o lado são e não interprete o teste isoladamente.</p>';
 }
 function jobeFallbackSVG(){
@@ -3247,19 +3243,19 @@ function buildKneeScene(container,state,mode){
   kneeGroup.rotation.x=0;shankGroup.position.set(0,0,0);shankGroup.rotation.set(0,0,0);patella.position.set(0,.02,.17);pain.position.set(-.15,0,.12);
   handThigh.visible=!!s.force;handShank.visible=!!s.force;handPatella.visible=false;pain.visible=!!s.pain;arrow.visible=false;
   if(mode==='lachman'){
-   kneeGroup.rotation.x=-D(s.flex);shankGroup.position.z=s.trans/100;arrow.visible=!!s.force;
+   kneeGroup.rotation.x=D(s.flex);shankGroup.position.z=s.trans/100;arrow.visible=!!s.force;
   }else if(mode==='gaveta-anterior'){
-   kneeGroup.rotation.x=-D(s.flex);shankGroup.position.z=s.trans/100;arrow.visible=!!s.force;
+   kneeGroup.rotation.x=D(s.flex);shankGroup.position.z=s.trans/100;arrow.visible=!!s.force;
   }else if(mode==='mcmurray'){
-   kneeGroup.rotation.x=-D(s.flex);shankGroup.rotation.y=D(s.rot);
+   kneeGroup.rotation.x=D(s.flex);shankGroup.rotation.y=D(s.rot);
   }else if(mode==='valgo'){
-   kneeGroup.rotation.x=-D(s.flex);shankGroup.rotation.z=D(s.angle);arrow.visible=!!s.force;
+   kneeGroup.rotation.x=D(s.flex);shankGroup.rotation.z=D(s.angle);arrow.visible=!!s.force;
   }else if(mode==='varo'){
-   kneeGroup.rotation.x=-D(s.flex);shankGroup.rotation.z=-D(s.angle);arrow.visible=!!s.force;
+   kneeGroup.rotation.x=D(s.flex);shankGroup.rotation.z=-D(s.angle);arrow.visible=!!s.force;
   }else if(mode==='apreensao-patelar'){
-   kneeGroup.rotation.x=-D(s.flex);patella.position.x=s.glide/100;handPatella.visible=!!s.force;handThigh.visible=false;handShank.visible=false;arrow.visible=!!s.force;pain.position.set(.08,.02,.24);
+   kneeGroup.rotation.x=D(s.flex);patella.position.x=s.glide/100;handPatella.visible=!!s.force;handThigh.visible=false;handShank.visible=false;arrow.visible=!!s.force;pain.position.set(.08,.02,.24);
   }else if(mode==='ballottement'){
-   kneeGroup.rotation.x=-D(s.flex);patella.position.z=.17-s.press/100;handPatella.visible=!!s.force;handThigh.visible=false;handShank.visible=false;arrow.visible=!!s.force;pain.position.set(0,.02,.24);
+   kneeGroup.rotation.x=D(s.flex);patella.position.z=.17-s.press/100;handPatella.visible=!!s.force;handThigh.visible=false;handShank.visible=false;arrow.visible=!!s.force;pain.position.set(0,.02,.24);
   }
  }
  apply(state);
@@ -3365,7 +3361,6 @@ function route(){
  if(a==='bandeiras')return pageBandeiras();
  if(a==='regras')return pageRegras();
  if(a==='conduta')return pageConduta();
- if(a==='encaminhar')return pageEncaminhar();
  if(a==='sn-sp')return pageSnSp();
  if(a==='referencias')return pageReferencias();
  if(a==='sobre')return pageSobre();

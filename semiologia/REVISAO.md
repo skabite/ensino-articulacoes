@@ -15,7 +15,7 @@ Para cada região, confira:
 - [ ] Diagnósticos: pistas, diferenciais e o que não perder.
 - [ ] Conduta: medidas não farmacológicas, segurança e o que evitar.
 - [ ] Imagem: quando pedir e quando não pedir.
-- [ ] Encaminhamento: prioridade, destino e checklist.
+- [ ] Referenciamento: entra em uma fase futura (fora desta versão).
 - [ ] Linguagem: adequada para médicos e enfermeiros da APS.
 
 ## Ombro (piloto)
@@ -27,7 +27,7 @@ Para cada região, confira:
 - [ ] Diagnósticos comuns
 - [ ] Fluxo rápido
 - [ ] Imagem
-- [ ] Encaminhamento e checklist
+- [ ] Referenciamento: futuro
 - [ ] Pérolas e armadilhas
 - [ ] Referências
 
@@ -66,7 +66,7 @@ Para cada região, confira:
 - [ ] Diagnósticos comuns
 - [ ] Fluxo rápido
 - [ ] Imagem (incluindo Ottawa joelho)
-- [ ] Encaminhamento e checklist
+- [ ] Referenciamento: futuro
 - [ ] Pérolas e armadilhas
 - [ ] Referências
 
@@ -108,7 +108,6 @@ Para cada região, confira:
 - [ ] Bandeiras vermelhas globais
 - [ ] Regras de decisão (Ottawa)
 - [ ] Conduta inicial
-- [ ] Como encaminhar
 - [ ] Utilidade da imagem e achados em assintomáticos
 - [ ] Como ler Sn/Sp
 - [ ] Referências
